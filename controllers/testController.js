@@ -18,7 +18,12 @@ async function getJson(req, res) {
 async function getFeed(id, req, res) {
   const result = (await Spyinglist
     .findAll({where: {idOwner: id}})
-  )
+  );
+
+  const listName = [];
+  result.map((index) => {
+    const result = 0;
+  })
 
   const endpoint = () => {return req.params.id+"?fields=follows_count%2Cmedia_count%2Cfollowers_count%2Cbusiness_discovery.username(design__addict)%2Cmedia%7Bid%2Clike_count%2Ccomments_count%2Cmedia_url%2Cpermalink%7D&access_token="+req.params.token};
   console.log(endpoint);
