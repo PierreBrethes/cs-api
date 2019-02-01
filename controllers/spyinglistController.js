@@ -7,6 +7,13 @@ async function index(req, res) {
   res.json(result);
 }
 
+async function indexById(id, req, res) {
+  const result = (await Spyinglist
+    .findAll({where: {idOwner: id}})
+  )
+  res.json(result);
+}
+
 async function create(data, req, res) {
   const result = (await Spyinglist
     .findOrCreate({where: {idOwner: data.idOwner, name: data.name}})
@@ -35,4 +42,4 @@ async function deleteItem(data, req, res) {
   )
 }
 
-module.exports = {index, create, deleteItem};
+module.exports = {index, indexById, create, deleteItem};
