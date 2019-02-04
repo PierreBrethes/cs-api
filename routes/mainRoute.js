@@ -5,11 +5,22 @@ const spyinglistController = require('../controllers/spyinglistController.js')
 const Spyinglist = require('../controllers/SpyinglistController')
 var bodyParser = require('body-parser')
 
+// TEST ROUTES
 router.get('/spyinglist/:id/:token', function(req, res, next) {
   return testController.getJson(req, res)
   res.end()
 })
 
+router.get('/feed/:id/:token', function(req, res, next) {
+  return testController.getFeed(req, res)
+  res.end()
+})
+
+
+
+
+
+// REAL ROUTES
 router.get('/spyinglist',function(req,res,next){
   return spyinglistController.index(req, res)
  })
