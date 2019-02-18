@@ -4,6 +4,8 @@ const testController = require('../controllers/testController.js')
 const spyinglistController = require('../controllers/spyinglistController.js')
 const Spyinglist = require('../controllers/SpyinglistController')
 var bodyParser = require('body-parser')
+var cors = require('cors');
+
 
 // TEST ROUTES
 router.get('/spyinglist/:id/:token', function(req, res, next) {
@@ -31,12 +33,13 @@ router.get('/spyinglist',function(req,res,next){
 
 router.post('/spyinglist/:id', function(req,res,next){
   const data = { idOwner: req.params.id, name: req.body.name}
-  console.log('------', req.body)
   return spyinglistController.create(data, req, res)
 })
 
-router.delete('/spyinglist/:id', function(req,res,next){
-  const data = { idOwner: req.params.id, name: req.body.name}
+router.options('/spyinglist/:id/:rss', cors()) 
+router.delete('/spyinglist/:id/:rss', cors(), function(req,res,next){
+  console.log(req.body.id_fetchrss);
+  const data = { idOwner: req.params.id, id_fetchrss: req.params.rss}
   return spyinglistController.deleteItem(data, req, res)
 })
 

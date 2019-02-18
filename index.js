@@ -5,6 +5,7 @@ const path = require('path')
 const app = express()
 var mysql = require("mysql");
 var Sequelize = require("sequelize");
+var cors = require('cors');
 
 const tplIndexPath = path.join(__dirname, 'views', 'index.pug')
 const renderIndex = pug.compileFile(tplIndexPath)
@@ -22,12 +23,20 @@ app.use(function(req, res, next){
 	next();
 });
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET", "PUT", "POST", "DELETE", "OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+var whitelist = ['localhost:3000']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(cors())
+app.options('/products/:id', cors())
+
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -9,7 +9,7 @@ const access_token = "EAAIN3B5QQx4BAK3m19sQblC7OVz48ue3LdU6EtNbC8VHHoONHTu4KIXMX
 const user = "17841407080160735";
 
 async function getJson(req, res) {
-  const endpoint = () => {return req.params.id+"?fields=follows_count%2Cmedia_count%2Cfollowers_count%2Cbusiness_discovery.username(design__addict)%2Cmedia%7Bid%2Clike_count%2Ccomments_count%2Cmedia_url%2Cpermalink%7D&access_token="+req.params.token};
+  const endpoint = () => {return req.params.id+"?fields=follows_count%2Cmedia_count%2Cfollowers_count%2Cbusiness_discovery.username(design__addict)%2Cmedia%7Bid%2Clike_count%2Ccomments_count%2Cmedia_url%2Cpermalink%2Ctimestamp%7D&access_token="+req.params.token};
   console.log(endpoint);
   const data = await request(host, endpoint(), null, null, "GET");
 
@@ -31,7 +31,7 @@ async function getFeed(req, res) {
       })
 
       // PREPARE ENDPOINT FOR REQUEST GRAPH.FACEBOOK
-      const endpoint = (name) => {return req.params.id+"?fields=follows_count%2Cmedia_count%2Cfollowers_count%2Cbusiness_discovery.username("+name+")%2Cmedia%7Bid%2Clike_count%2Cmedia.limit(10)%2Ccomments_count%2Cmedia_url%2Cpermalink%7D&access_token="+req.params.token};
+      const endpoint = (name) => {return req.params.id+"?fields=follows_count%2Cmedia_count%2Cfollowers_count%2Cbusiness_discovery.username("+name+")%2Cmedia%7Bid%2Clike_count%2Cmedia.limit(10)%2Ccomments_count%2Cmedia_url%2Cpermalink%2Ccaption%7D&access_token="+req.params.token};
 
       // REQUEST GRAPH.FACEBOOK for each name in "names" array, and push it in
       names.map(async (index) => {
@@ -50,30 +50,13 @@ async function getFeed(req, res) {
   }
 }
 
-// async function getFeed(id, token, req, res) {
-//   const feed = [];
-//   const endpoint = () => {return req.params.id+"?fields=follows_count%2Cmedia_count%2Cfollowers_count%2Cbusiness_discovery.username(design__addict)%2Cmedia%7Bid%2Clike_count%2Ccomments_count%2Cmedia_url%2Cpermalink%7D&access_token="+req.params.token};
-//   console.log(endpoint);
-//   const data = await request(host, endpoint(), null, null, "GET");
-//
-//   res.json(data)
-
-  // GET LIST OF NAME SAVED
-  // const result = (await Spyinglist
-  //   .findAll({where: {idOwner: id}})
-  // );
-  // PREPARE ENDPOINT
-  // const endpoint = (name) => {return req.params.id+"?fields=follows_count%2Cmedia_count%2Cfollowers_count%2Cbusiness_discovery.username("+name+")%2Cmedia%7Bid%2Clike_count%2Ccomments_count%2Cmedia_url%2Cpermalink%7D&access_token="+req.params.token};
-
-  // REQUEST FOR EACH ELEMENT IN LIST NAME
-  // const listName = [];
-  // result.map((index) => {
-    // const data = await request(host, endpoint(index.name), null, null, "GET");
-    // console.log(index);
-  // })
-
-  // res.json('YO')
-// }
+async function hashtag(req, res) {
+  try {
+    
+  } catch (error) {
+    
+  }
+}
 
 module.exports = {
   getJson,
