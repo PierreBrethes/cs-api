@@ -19,9 +19,6 @@ router.get('/feed/:id/:token', function(req, res, next) {
 })
 
 
-
-
-
 // REAL ROUTES
 router.get('/spyinglist',function(req,res,next){
   return spyinglistController.index(req, res)
